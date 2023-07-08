@@ -116,30 +116,6 @@ require('lazy').setup({
   },
 
   {
-    -- Trouble 
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
-  },
-
-  {
-    -- nvim-tree
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("nvim-tree").setup {}
-    end,
-  },
-
-  {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
@@ -238,6 +214,8 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+vim.o.relativenumber = true
 
 -- [[ Basic Keymaps ]]
 
@@ -507,18 +485,6 @@ cmp.setup {
 vim.keymap.set("n", "<leader>tt", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>tr", ":NvimTreeRefresh<CR>")
 vim.keymap.set("n", "<leader>tn", ":NvimTreeFindFile<CR>")
-
-require("nvim-tree").setup({
-    -- ignore_buffer_on_setup = true,
-    view = {
-        side = "right",
-        width = 40,
-    },
-    diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-    },
-})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
