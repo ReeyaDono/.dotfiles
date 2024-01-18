@@ -27,12 +27,11 @@
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 import os
 import subprocess
 
 mod = "mod4"
-terminal = guess_terminal()
+terminal = "alacritty"
 wallpaper_path = os.path.expanduser("~/Pictures/Wallpapers/Toki.jpg")
 
 @hook.subscribe.startup_once
@@ -50,16 +49,14 @@ keys = [
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
     # Move Window
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, "shift"], "h", lazy.layout.swap_left(), desc="Move window to the left"),
+    Key([mod, "shift"], "l", lazy.layout.swap_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
 
     # Resize Window
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, "control"], "j", lazy.layout.shrink(), desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key(
         [mod],
@@ -79,10 +76,12 @@ keys = [
 
     # Spawn Apps
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "d", lazy.spawn("rofi -show drun"), desc="Launch rofi")
+    Key([mod], "d", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q s +20%")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q s 20%-"))
 ]
 
-groups = [Group(i) for i in "123456789"]
+groups = [Group(i, layout="monadtall") for i in "123456789"]
 
 for i in groups:
     keys.extend(
@@ -108,20 +107,16 @@ for i in groups:
         ]
     )
 
+layout_theme = { 
+    "border_width": 3,
+    "margin": 10,
+    "single_border_width": 3
+}
+
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    layout.Max(**layout_theme),
+    layout.MonadTall(**layout_theme),
+    layout.Floating()
 ]
 
 widget_defaults = dict(
