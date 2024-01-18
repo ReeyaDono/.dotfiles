@@ -31,8 +31,7 @@ import os
 import subprocess
 
 mod = "mod4"
-terminal = "alacritty"
-wallpaper_path = os.path.expanduser("~/Pictures/Wallpapers/Toki.jpg")
+terminal = "kitty"
 
 @hook.subscribe.startup_once
 def autostart():
@@ -131,8 +130,6 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        wallpaper=wallpaper_path,
-        wallpaper_mode="fill",
         bottom=bar.Bar(
             [
                 widget.CurrentLayout(),
