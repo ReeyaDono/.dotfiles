@@ -29,9 +29,12 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import os
 import subprocess
+import json
+from pathlib import Path
 
 mod = "mod4"
 terminal = "kitty"
+home = str(Path.home())
 
 @hook.subscribe.startup_once
 def autostart():
@@ -80,7 +83,8 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "d", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q s +20%")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q s 20%-"))
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q s 20%-")),
+    Key([mod, "shift"], "w", lazy.spawn(home + "/.config/qtile/wallpaper.sh"), desc="Update Theme and Wallpaper"),
 ]
 
 groups = [Group(i, layout="monadtall") for i in "123456789"]
@@ -109,9 +113,35 @@ for i in groups:
         ]
     )
 
+# --------------------------------------------------------
+# Pywal Colors
+# --------------------------------------------------------
+
+colors = os.path.expanduser('~/.cache/wal/colors.json')
+colordict = json.load(open(colors))
+Color0=(colordict['colors']['color0'])
+Color1=(colordict['colors']['color1'])
+Color2=(colordict['colors']['color2'])
+Color3=(colordict['colors']['color3'])
+Color4=(colordict['colors']['color4'])
+Color5=(colordict['colors']['color5'])
+Color6=(colordict['colors']['color6'])
+Color7=(colordict['colors']['color7'])
+Color8=(colordict['colors']['color8'])
+Color9=(colordict['colors']['color9'])
+Color10=(colordict['colors']['color10'])
+Color11=(colordict['colors']['color11'])
+Color12=(colordict['colors']['color12'])
+Color13=(colordict['colors']['color13'])
+Color14=(colordict['colors']['color14'])
+Color15=(colordict['colors']['color15'])
+
+
 layout_theme = { 
     "border_width": 3,
     "margin": 10,
+    "border_focus": Color2,
+    "border_normal": "FFFFFF",
     "single_border_width": 3
 }
 
