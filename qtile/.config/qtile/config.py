@@ -69,9 +69,12 @@ keys = [
     Key([mod, "shift"], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
 
+    # Group
+    Key([mod], "Tab", lazy.screen.toggle_group(), desc="Alternate between two most recent groups"),
+
     # System
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
     # Spawn Apps
