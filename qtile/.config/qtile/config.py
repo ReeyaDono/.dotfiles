@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, widget, hook
+from libqtile import bar, layout, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import os
@@ -84,10 +84,15 @@ keys = [
     Key([mod], "d", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q s +20%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q s 20%-")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(home + "/.config/qtile/audio.sh up")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(home + "/.config/qtile/audio.sh down")),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
+    Key([mod, "shift"], "s", lazy.spawn(f"flameshot gui -p {home}/Pictures/Screenshots")),
+    Key([mod], "print", lazy.spawn(f"flameshot full -p {home}/Pictures/Screenshots")),
     Key([mod, "shift"], "w", lazy.spawn(home + "/.config/qtile/wallpaper.sh"), desc="Update Theme and Wallpaper"),
 ]
 
-groups = [Group(i, layout="monadtall") for i in "123456789"]
+groups = [Group(i, layout="monadtall", label="♚") for i in "123456"]
 
 for i in groups:
     keys.extend(
@@ -148,7 +153,6 @@ layout_theme = {
 layouts = [
     layout.Max(**layout_theme),
     layout.MonadTall(**layout_theme),
-    layout.Floating()
 ]
 
 widget_defaults = dict(
@@ -159,36 +163,7 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 screens = [
-    Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
-    ),
+    Screen(top=bar.Gap(50)),
 ]
 
 # Drag floating layouts.
