@@ -1,120 +1,171 @@
-/*******************************************************
- * ROFI configs i3 powermenu for EndeavourOS
- * Maintainer: joekamprad <joekamprad@endeavouros.com>
- *******************************************************/
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+ /*****----- Configuration -----*****/
 configuration {
-    font:                           "Noto Sans Regular 10";
-    show-icons:                     false;
-    icon-theme: 		    "Qogir";
-    scroll-method:                  0;
-    disable-history:                false;
-    sidebar-mode: 		    false;
+    show-icons:                 false;
 }
 
-@import "~/.config/rofi/arc_dark_transparent_colors.rasi"
+/*****----- Global Properties -----*****/
+@import                          "colors.rasi"
 
+* {
+    font: "JetBrains Mono Nerd Font 10";
+}
+
+/*****----- Main Window -----*****/
 window {
-    background-color:               @background;
-    border:                         0;
-    padding:                        10;
-    transparency:                   "real";
-    width:                          120px;
-    location:                       east;
-/*y-offset:                       18;*/
-/*x-offset:	                    850;*/
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    south;
+    anchor:                      south;
+    fullscreen:                  false;
+    width:                       500px;
+    x-offset:                    0px;
+    y-offset:                    -15px;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @selected;
+    cursor:                      "default";
+    background-color:            @background;
 }
-listview {
-    lines:                          6;
-    columns:                        1;
-    scrollbar:                     false;
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     15px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    background-color:            transparent;
+    children:                    [ "message", "listview" ];
 }
-element {
-    border:  0;
-    padding: 1px ;
-}
-element-text {
-    background-color: inherit;
-    text-color:       inherit;
-}
-element.normal.normal {
-    background-color: @normal-background;
-    text-color:       @normal-foreground;
-}
-element.normal.urgent {
-    background-color: @urgent-background;
-    text-color:       @urgent-foreground;
-}
-element.normal.active {
-    background-color: @active-background;
-    text-color:       @active-foreground;
-}
-element.selected.normal {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-}
-element.selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color:       @selected-urgent-foreground;
-}
-element.selected.active {
-    background-color: @selected-active-background;
-    text-color:       @selected-active-foreground;
-}
-element.alternate.normal {
-    background-color: @alternate-normal-background;
-    text-color:       @alternate-normal-foreground;
-}
-element.alternate.urgent {
-    background-color: @alternate-urgent-background;
-    text-color:       @alternate-urgent-foreground;
-}
-element.alternate.active {
-    background-color: @alternate-active-background;
-    text-color:       @alternate-active-foreground;
-}
-scrollbar {
-    width:        4px ;
-    border:       0;
-    handle-color: @normal-foreground;
-    handle-width: 8px ;
-    padding:      0;
-}
-mode-switcher {
-    border:       2px 0px 0px ;
-    border-color: @separatorcolor;
-}
-button {
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-button.selected {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-}
+
+/*****----- Inputbar -----*****/
 inputbar {
-    spacing:    0;
-    text-color: @normal-foreground;
-    padding:    1px ;
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px;
+    border-radius:               0px;
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    children:                    [ "textbox-prompt-colon", "prompt"];
 }
-case-indicator {
-    spacing:    0;
-    text-color: @normal-foreground;
+
+dummy {
+    background-color:            transparent;
 }
-entry {
-    spacing:    0;
-    text-color: @normal-foreground;
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "";
+    padding:                     12px 16px;
+    border-radius:               0px;
+    background-color:            @urgent;
+    text-color:                  @background;
 }
 prompt {
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-}
-textbox-prompt-colon {
-    expand:     false;
-    str:        ":";
-    margin:     0px 0.3em 0em 0em ;
-    text-color: @normal-foreground;
+    enabled:                     true;
+    padding:                     12px;
+    border-radius:               0px;
+    background-color:            @active;
+    text-color:                  @background;
 }
 
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     12px;
+    border:                      0px 2px dash 0px 2px dash;
+    border-radius:               12px;
+    border-color:                @selected;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+}
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    placeholder-color:           @foreground;
+    blink:                       true;
+    markup:                      true;
+}
+error-message {
+    padding:                     12px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     5;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     20px 0px;
+    border:                      0px;
+    border-radius:               30px 12px 30px 12px;
+    border-color:                @selected;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+element-text {
+    font:                        "feather bold 24";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+element selected.normal {
+    border:                      0px 10px dash 0px 10px dash;
+    border-color:                @selected;
+    background-color:            var(selected);
+    text-color:                  var(background);
+}

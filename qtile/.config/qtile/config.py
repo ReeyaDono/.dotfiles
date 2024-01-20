@@ -78,10 +78,11 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "shift"], "e", lazy.spawn(home + "/.config/rofi/script/powermenu.sh")),
 
     # Spawn Apps
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "d", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
+    Key([mod], "d", lazy.spawn(home + "/.config/rofi/script/launcher.sh"), desc="Launch rofi"),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q s +20%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q s 20%-")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn(home + "/.config/qtile/audio.sh up")),

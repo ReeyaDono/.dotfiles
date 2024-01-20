@@ -1,0 +1,8 @@
+@import "~/.cache/wal/colors-rofi-dark"
+
+* {
+    background-alt: #282B31FF;
+    selected:       @selected-urgent-background;
+    active:         @active-background;
+    urgent:         @urgent-background;
+}
