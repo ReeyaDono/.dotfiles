@@ -144,9 +144,9 @@ Color15=(colordict['colors']['color15'])
 
 layout_theme = { 
     "border_width": 3,
-    "margin": 10,
-    "border_focus": Color2,
-    "border_normal": "FFFFFF",
+    "margin": 20,
+    "border_focus": Color4,
+    "border_normal": Color0,
     "single_border_width": 3
 }
 
@@ -189,7 +189,10 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-    ]
+    ],
+    border_focus = Color4,
+    border_normal = Color0,
+    border_width = 3,
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"

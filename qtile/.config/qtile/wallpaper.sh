@@ -18,15 +18,15 @@ case $1 in
     # Load wallpaper from .cache of last session 
     "init")
         if [ -f $cache_file ]; then
-            wal -q -i $current_wallpaper
+            wal -q -i $current_wallpaper --backend colorz
         else
-            wal -q -i ~/Pictures/Wallpapers/
+            wal -q -i ~/Pictures/Wallpapers/ --backend colorz
         fi
     ;;
 
     # Randomly select wallpaper 
     *)
-        wal -q -i ~/Pictures/Wallpapers/
+        wal -q -i ~/Pictures/Wallpapers/ --backend colorz
     ;;
 
 esac
