@@ -3,6 +3,9 @@
 # Load Picom
 picom &
 
+# Load notification service
+dunst &
+
 # Setup Wallpaper and update colors
 ~/.config/qtile/wallpaper.sh init
 
