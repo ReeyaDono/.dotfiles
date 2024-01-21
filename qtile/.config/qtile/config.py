@@ -25,7 +25,7 @@
 # SOFTWARE.
 
 from libqtile import bar, layout, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 import os
 import subprocess
@@ -93,7 +93,14 @@ keys = [
     Key([mod, "shift"], "w", lazy.spawn(home + "/.config/qtile/wallpaper.sh"), desc="Update Theme and Wallpaper"),
 ]
 
-groups = [Group(i, layout="monadtall", label="♚") for i in "123456"]
+groups = [
+    Group("1", layout="monadtall"),
+    Group("2", layout="monadtall"),
+    Group("3", layout="monadtall"),
+    Group("4", layout="monadtall"),
+    Group("5", layout="monadtall"),
+    Group("6", layout="monadtall"),
+]
 
 for i in groups:
     keys.extend(
@@ -118,6 +125,12 @@ for i in groups:
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
+
+# groups.append(
+#     ScratchPad("scratchpad", [
+#         DropDown("systray", "stalonetray", match=Match(title="stalonetray")),
+#     ]),
+# )
 
 # --------------------------------------------------------
 # Pywal Colors

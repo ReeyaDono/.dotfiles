@@ -14,7 +14,8 @@ killall -q polybar
 # killall -q stalonetray
 
 # Launch Polybar, using default config location ~/.config/polybar/config.ini
-# stalonetray & sleep 0.1 && xdo hide -N stalonetray && touch "/tmp/syshide.lock"
+# qtile cmd-obj -o group scratchpad -f dropdown_toggle -a systray
+# xdo hide -N stalonetray && touch "/tmp/syshide.lock"
 polybar -r bar-left 2>&1 | tee -a /tmp/polybar.log & disown
 polybar -r bar-right 2>&1 | tee -a /tmp/polybar.log & disown
 polybar -r bar-center 2>&1 | tee -a /tmp/polybar.log & disown
