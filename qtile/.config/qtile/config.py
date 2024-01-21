@@ -94,12 +94,12 @@ keys = [
 ]
 
 groups = [
-    Group("1", layout="monadtall"),
-    Group("2", layout="monadtall"),
-    Group("3", layout="monadtall"),
-    Group("4", layout="monadtall"),
+    Group("1", layout="monadtall", matches=[Match(wm_class="kitty")]),
+    Group("2", layout="monadtall", matches=[Match(wm_class="google-chrome")]),
+    Group("3", layout="monadtall", matches=[Match(wm_class="discord")]),
+    Group("4", layout="monadtall", matches=[Match(wm_class="thunar")]),
     Group("5", layout="monadtall"),
-    Group("6", layout="monadtall"),
+    Group("6", layout="monadtall", matches=[Match(wm_class="spotify")]),
 ]
 
 for i in groups:
