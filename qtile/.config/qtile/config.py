@@ -83,6 +83,7 @@ keys = [
     # Spawn Apps
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "d", lazy.spawn(home + "/.config/rofi/script/launcher.sh"), desc="Launch rofi"),
+    Key([mod, "shift"], "n", lazy.spawn(home + "/.config/rofi/script/wifimenu.sh"), desc="Launch rofi wifi"),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q s +20%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q s 20%-")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn(home + "/.config/qtile/audio.sh up")),
